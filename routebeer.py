@@ -2,10 +2,10 @@
     Routebeer 0001
     
     A handy, cross-platform utility for adding manual IP routes in bulk.
-
+    
     Copyright Vincent Brubaker-Gianakos
     Some Rights Reserved
-
+    
     This work is licensed under a Creative Commons Attribution 3.0 United States License.
     
     http://creativecommons.org/licenses/by/3.0/us/
@@ -36,11 +36,9 @@ def ValidIPV4(addr):
 def ValidMAC(addr):
     return match("[0-9a-f]{2}([-:][0-9a-f]{2}){5}$", addr.lower())
 
-platform = os.uname()[0]
-
-if (platform == 'Darwin'):
+if (os.name == "posix"):
     def Usage():
-        print " ".join(["Darwin", "Usage:", "python" , os.path.basename(sys.argv[0]), "gateway [address, address, address]"])
+        print " ".join(["Posix", "usage:", "python" , os.path.basename(sys.argv[0]), "gateway [address, address, address]"])
     def Main():
         if(len(sys.argv) == 2):
             if(sys.argv[1] == "print"):
@@ -56,7 +54,7 @@ if (platform == 'Darwin'):
                 print popen(shell).read()
         else:
             Usage()
-else:
+elif (os.name == "nt"):
     def GetRoutes():
         return_vals = popen("route print").read()
         if return_vals:
@@ -68,7 +66,7 @@ else:
             return [[x for x in elem.strip().split('...') if x] for elem in return_vals.split("\n") if len([x for x in elem.strip().split('...') if x]) > 2]
     
     def Usage():
-        print " ".join(["Windows", "Usage:", "python", os.path.basename(sys.argv[0]), " interface metric gateway [address, address, address]"])
+        print " ".join(["Windows", "usage:", "python", os.path.basename(sys.argv[0]), " interface metric gateway [address, address, address]"])
 
     def Main():
         if(len(sys.argv) == 2):
