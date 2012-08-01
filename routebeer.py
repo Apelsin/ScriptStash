@@ -49,7 +49,7 @@ if (os.name == "posix"):
             arg_gateway = sys.argv[1]
             arg_addresses = sys.argv[2:]
             for addr in arg_addresses:
-                shell = " ".join(['sudo', 'route', 'add', addr + "/32", arg_gateway])
+                shell = " ".join(['route', 'add', addr + "/32", arg_gateway])
                 print shell
                 print popen(shell).read()
         else:
