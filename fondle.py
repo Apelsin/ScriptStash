@@ -23,10 +23,6 @@ def ensure_dir(directory):
         return True
     return False
 
-def Usage():
-    print "Fondle touches files."
-    print "usage:\n$: fondle file [file1...filen]"
-
 def Main():
     parser = optparse.OptionParser()
     parser.add_option('-d', '--descending', dest="descending", action="store_true", help="Sort in descending order")
